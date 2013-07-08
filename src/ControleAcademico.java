@@ -1,16 +1,22 @@
 import java.util.*;
 
 public class ControleAcademico {
-	private List<Aluno> alunos = new ArrayList<Aluno>();
+	private List<Aluno> alunos = new LinkedList<Aluno>();
 	private static boolean primeiroAluno;
-	private static boolean addAluno;
+	private boolean addAluno;
 	
 	public List<Aluno> getAlunos(){
 		return alunos;
 	}
 	
-	public void addAluno(Aluno alunos){
-		this.alunos.add(alunos);
+	public void addAluno(Aluno aluno){
+		if(this.alunos == null){
+			this.setPrimeiroAluno(aluno);
+		}
+		else{
+			alunos.add(aluno);
+			addAluno = true;
+		}
 	}
 	
 	public boolean getAddAluno(){
@@ -21,8 +27,9 @@ public class ControleAcademico {
 		return primeiroAluno;
 	}
 	
-	public void setPrimeiroAluno(boolean a) {
-		primeiroAluno = a;
+	public void setPrimeiroAluno(Aluno a) {
+		alunos.add(a);
+		primeiroAluno = true;
 	}
 	
 	public String removerAluno(Aluno aluno){
@@ -37,5 +44,21 @@ public class ControleAcademico {
 		return true;
 	}
 	
+	public String procuraAlunoPorMatricula(int matricula){
+		for(Aluno a : alunos){
+			if(a.getMatricula() == matricula){
+				return a.getNome();
+			}
+		}
+		throw new ExcecaoControleAcademico("Não encontrado");
+	}
 	
+	public boolean procuraAlunoPormatriculaConfirmacao(int matricula){
+		for(Aluno a : alunos){
+			if(a.getMatricula() == matricula){
+				return true;
+			}
+		}
+		throw new ExcecaoControleAcademico("Não encontrado");
+	}
 }

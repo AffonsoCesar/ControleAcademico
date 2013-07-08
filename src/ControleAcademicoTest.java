@@ -15,16 +15,10 @@ public class ControleAcademicoTest {
 	}
 	
 	@Test
-	public void definirPrimeiroAluno(){
-		controleAcademico.setPrimeiroAluno(true);
-		Assert.assertTrue("espera que controleAcademico inicialize com null", controleAcademico.getPrimeiroAluno());
-	}
-	
-	@Test
 	public void addAluno(){
 		Aluno aluno = new Aluno("João", 17, "masculino", 1234);
 		controleAcademico.addAluno(aluno);
-		Assert.assertTrue("espera que controleAcademico adicione aluno", controleAcademico.getPrimeiroAluno());
+		Assert.assertTrue("espera que controleAcademico adicione aluno", controleAcademico.getAddAluno());
 	}
 	
 	@Test
@@ -32,5 +26,12 @@ public class ControleAcademicoTest {
 		Aluno aluno = new Aluno("João", 17, "masculino", 1234);
 		controleAcademico.removerAluno(aluno);
 		Assert.assertTrue("espera que remova aluno", controleAcademico.getAlunoRemovido(aluno));
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void procurarAlunoPorMatricula(){
+		int matricula = 12458547;
+		controleAcademico.procuraAlunoPorMatricula(matricula);
+		Assert.assertTrue("espera retornar nome do aluno", controleAcademico.procuraAlunoPormatriculaConfirmacao(matricula));
 	}
 }
