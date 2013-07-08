@@ -15,10 +15,15 @@ public class ControleAcademicoTest {
 	}
 	
 	@Test
-	public void criarAluno() {
-		Aluno aluno = new Aluno("João", 17, "masculino", 1234);
-		controleAcademico.setPrimeiroAluno(aluno);
-		Assert.assertTrue("Aluno foi adicionado", true);	
+	public void definirPrimeiroAluno(){
+		controleAcademico.setPrimeiroAluno(true);
+		Assert.assertTrue("espera que controleAcademico inicialize com null", controleAcademico.getPrimeiroAluno());
 	}
-
+	
+	@Test
+	public void addAluno(){
+		Aluno aluno = new Aluno("João", 17, "masculino", 1234);
+		controleAcademico.addAluno(aluno);
+		Assert.assertTrue("espera que controleAcademico adicione aluno", controleAcademico.getPrimeiroAluno());
+	}
 }
