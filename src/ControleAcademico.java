@@ -13,7 +13,7 @@ public class ControleAcademico {
 		this.alunos.add(alunos);
 	}
 	
-	public static boolean getAddAluno(){
+	public boolean getAddAluno(){
 		return addAluno;
 	}
 	
@@ -24,5 +24,18 @@ public class ControleAcademico {
 	public void setPrimeiroAluno(boolean a) {
 		primeiroAluno = a;
 	}
-
+	
+	public String removerAluno(Aluno aluno){
+		alunos.remove(aluno);
+		return aluno.getNome();
+	}
+	
+	public boolean getAlunoRemovido(Aluno a){
+		if(a.equals(alunos)){
+			return false;
+		}
+		return true;
+	}
+	
+	
 }

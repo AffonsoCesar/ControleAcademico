@@ -26,4 +26,11 @@ public class ControleAcademicoTest {
 		controleAcademico.addAluno(aluno);
 		Assert.assertTrue("espera que controleAcademico adicione aluno", controleAcademico.getPrimeiroAluno());
 	}
+	
+	@Test
+	public void removerAluno(){
+		Aluno aluno = new Aluno("João", 17, "masculino", 1234);
+		controleAcademico.removerAluno(aluno);
+		Assert.assertTrue("espera que remova aluno", controleAcademico.getAlunoRemovido(aluno));
+	}
 }
