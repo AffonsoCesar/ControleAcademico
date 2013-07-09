@@ -1,15 +1,18 @@
-import java.util.*;
 
 public class Aluno {
 	private String nome;
 	private int idade;
 	private String sexo;
 	private int matricula;
+	private int CPF;
+	private String endereco;
 	
-	public Aluno(String nome, int idade, String sexo, int matricula) {
+	public Aluno(String nome, int idade, String sexo, int matricula, int CPF, String endereco) {
 		this.setIdade(idade);
 		this.setSexo(sexo);
 		this.setMatricula(matricula);
+		this.setCPF(CPF);
+		this.setEndereco(endereco);
 	}
 
 	public String getNome() {
@@ -42,6 +45,22 @@ public class Aluno {
 
 	public void setMatricula(int matricula) {
 		this.matricula = matricula;
+	}
+
+	public int getCPF() {
+		return CPF;
+	}
+
+	public void setCPF(int CPF) {
+		this.CPF = CPF;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 	
 }
