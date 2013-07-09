@@ -1,5 +1,5 @@
-import static org.junit.Assert.*;
 import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -135,6 +135,48 @@ public class ControleAcademicoTest {
 		controleAcademico.setEnderecoAlunoProNome(endereco, nome);
 	}
 	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setNomeAlunoPorCPF(){
+		String nome = "João";
+		int CPF = 1252145254;
+		controleAcademico.setNomeAlunoPorCPF(nome, CPF);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setIdadeAlunoPorCPF(){
+		int idade = 25;
+		int CPF = 01254125;
+		controleAcademico.setIdadeAlunoPorCPF(idade, CPF);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setSexoAlunoPorCPF(){
+		String sexo = "Masculino";
+		int CPF = 12541254;
+		controleAcademico.setSexoAlunoPorCPF(sexo, CPF);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setMatriculaAlunoPorCPF(){
+		int matricula = 012412115;
+		int CPF = 1252514452;
+		controleAcademico.setMatriculaAlunoPorCPF(matricula, CPF);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setCPFAlunoPorCPF(){
+		int novoCPF = 1245412541;
+		int CPF = 1256252541;
+		controleAcademico.setCPFalunoPorCPF(novoCPF, CPF);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setEnderecoAlunoPorCPF(){
+		String endereco = "rua severino de menezes lira";
+		int CPF = 1254401254;
+		controleAcademico.setEnderecoAlunoPorCPF(endereco, CPF);
+	}
+	
 	@Test
 	public void getNomeAluno(){
 		Aluno aluno = new Aluno("João", 18, "masculino", 12354, 1254125, "rua felipe rodrigues");
@@ -164,8 +206,4 @@ public class ControleAcademicoTest {
 		Aluno aluno = new Aluno("João", 18, "masculino", 12354, 1254125, "rua felipe rodrigues");
 		controleAcademico.getCPFAluno(aluno);
 	}
-	
-	
-	
-	
 }

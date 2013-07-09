@@ -2,7 +2,6 @@ import java.util.*;
 
 public class ControleAcademico {
 	private List<Aluno> alunos = new LinkedList<Aluno>();
-	private List<Professor> professores = new LinkedList<Professor>();
 	private static boolean primeiroAluno;
 	
 	public List<Aluno> getAlunos(){
@@ -77,7 +76,7 @@ public class ControleAcademico {
 	}
 
 	private boolean comparaNomeAluno(String nome, Aluno a) {
-		return a.getNome().equals(nome);
+		return comparandoNome(nome, a);
 	}
 	
 	public String procurarAlunoPorCPF(int CPF){
@@ -99,7 +98,7 @@ public class ControleAcademico {
 	}
 
 	private boolean comparaCPF(int CPF, Aluno a) {
-		return a.getCPF() == CPF;
+		return comparandoCPF(CPF, a);
 	}
 	
 	public void setNomeAlunoPorMatricula(String nome, int matricula){
@@ -168,7 +167,7 @@ public class ControleAcademico {
 	
 	public void setNomeAlunoPorNome(String novoNome, String nome){
 		for(Aluno a : alunos){
-			if(a.getNome().equals(nome)){
+			if(comparandoNome(nome, a)){
 				a.setNome(novoNome);
 				return;
 			}
@@ -178,7 +177,7 @@ public class ControleAcademico {
 	
 	public void setIdadeAlunoPorNome(int idade, String nome){
 		for(Aluno a : alunos){
-			if(a.getNome().equals(nome)){
+			if(comparandoNome(nome, a)){
 				a.setIdade(idade);
 				return;
 			}
@@ -188,7 +187,7 @@ public class ControleAcademico {
 	
 	public void setSexoAlunoPorNome(String sexo, String nome){
 		for(Aluno a : alunos){
-			if(a.getNome().equals(nome)){
+			if(comparandoNome(nome, a)){
 				a.setSexo(sexo);
 				return;
 			}
@@ -198,7 +197,7 @@ public class ControleAcademico {
 	
 	public void setMatriculaAlunoPorNome(int matricula, String nome){
 		for(Aluno a : alunos){
-			if(a.getNome().equals(nome)){
+			if(comparandoNome(nome, a)){
 				a.setMatricula(matricula);
 				return;
 			}
@@ -208,7 +207,7 @@ public class ControleAcademico {
 	
 	public void setCPFAlunoPorNome(int CPF, String nome){
 		for(Aluno a : alunos){
-			if(a.getNome().equals(nome)){
+			if(comparandoNome(nome, a)){
 				a.setCPF(CPF);
 				return;
 			}
@@ -218,12 +217,74 @@ public class ControleAcademico {
 	
 	public void setEnderecoAlunoProNome(String endereco, String nome){
 		for(Aluno a : alunos){
-			if(a.getNome().equals(nome)){
+			if(comparandoNome(nome, a)){
 				a.setEndereco(endereco);
 				return;
 			}
 		}
 		throw new ExcecaoControleAcademico("Aluno não encontrado");
+	}
+
+	private boolean comparandoNome(String nome, Aluno a) {
+		return a.getNome().equals(nome);
+	}
+	
+	public void setNomeAlunoPorCPF(String nome, int CPF){
+		for(Aluno a : alunos){
+			if(comparandoCPF(CPF, a)){
+				a.setNome(nome);
+			}
+		}
+		throw new ExcecaoControleAcademico("Aluno não encontrado");
+	}
+	
+	public void setIdadeAlunoPorCPF(int idade, int CPF){
+		for(Aluno a : alunos){
+			if(comparandoCPF(CPF, a)){
+				a.setIdade(idade);
+			}
+		}
+		throw new ExcecaoControleAcademico("Aluno não encontrado");
+	}
+	
+	public void setSexoAlunoPorCPF(String sexo, int CPF){
+		for(Aluno a : alunos){
+			if(comparandoCPF(CPF, a)){
+				a.setSexo(sexo);
+			}
+		}
+		throw new ExcecaoControleAcademico("Aluno não encontrado");
+	}
+	
+	public void setMatriculaAlunoPorCPF(int matricula, int CPF){
+		for(Aluno a : alunos){
+			if(comparandoCPF(CPF, a)){
+				a.setMatricula(matricula);
+			}
+		}
+		throw new ExcecaoControleAcademico("Aluno não encontrado");
+	}
+	
+	public void setCPFalunoPorCPF(int novoCPF, int CPF){
+		for(Aluno a : alunos){
+			if(comparandoCPF(CPF, a)){
+				a.setCPF(novoCPF);
+			}
+		}
+		throw new ExcecaoControleAcademico("Aluno não encontrado");
+	}
+	
+	public void setEnderecoAlunoPorCPF(String endereco, int CPF){
+		for(Aluno a : alunos){
+			if(comparandoCPF(CPF, a)){
+				a.setEndereco(endereco);
+			}
+		}
+		throw new ExcecaoControleAcademico("Aluno não encontrado");
+	}
+	
+	private boolean comparandoCPF(int CPF, Aluno a) {
+		return a.getCPF() == CPF;
 	}
 	
 	public String getNomeAluno(Aluno aluno){
