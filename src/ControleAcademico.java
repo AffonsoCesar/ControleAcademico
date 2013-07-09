@@ -35,6 +35,7 @@ public class ControleAcademico {
 	public String removerAluno(Aluno aluno){
 		alunos.remove(aluno);
 		return aluno.getNome();
+		
 	}
 	
 	public boolean getAlunoRemovido(Aluno a){
@@ -46,7 +47,7 @@ public class ControleAcademico {
 	
 	public String procuraAlunoPorMatricula(int matricula){
 		for(Aluno a : alunos){
-			if(a.getMatricula() == matricula){
+			if(compararMatriculaAluno(matricula, a)){
 				return a.getNome();
 			}
 		}
@@ -55,10 +56,99 @@ public class ControleAcademico {
 	
 	public boolean procuraAlunoPormatriculaConfirmacao(int matricula){
 		for(Aluno a : alunos){
-			if(a.getMatricula() == matricula){
+			if(compararMatriculaAluno(matricula, a)){
 				return true;
 			}
 		}
 		throw new ExcecaoControleAcademico("Não encontrado");
+	}
+	
+	public String procuraAlunoPorNome(String nome){
+		for(Aluno a : alunos){
+			if(comparaNomeAluno(nome, a)){
+				return a.getNome();
+			}
+		}
+		throw new ExcecaoControleAcademico("Não encontrado");
+	}
+	
+	public boolean procurarAlunoPorNomeConfirmacao(String nome){
+		for(Aluno a : alunos){
+			if(comparaNomeAluno(nome, a)){
+				return true;
+			}
+		}
+		throw new ExcecaoControleAcademico("Não encontrado");
+	}
+
+	private boolean comparaNomeAluno(String nome, Aluno a) {
+		return a.getNome().equals(nome);
+	}
+	
+	public void setNomeAluno(String nome, int matricula){
+		for(Aluno a : alunos){
+			if(compararMatriculaAluno(matricula, a)){
+				a.setNome(nome);
+				return;
+			}
+		}
+		throw new ExcecaoControleAcademico("Não encontrado");		
+	}
+
+	private boolean compararMatriculaAluno(int matricula, Aluno a) {
+		return a.getMatricula() == matricula;
+	}
+	
+	public boolean setNomeAlunoConfirmacao(String nome, int matricula){
+		for(Aluno a : alunos){
+			if(compararMatriculaAluno(matricula, a)){
+				if(comparaNomeAluno(nome, a)){
+					return true;
+				}
+			}
+		}
+		throw new ExcecaoControleAcademico("Não encontrado");
+	}
+	
+	public void setIdadeAluno(int idade, int matricula){
+		for(Aluno a : alunos){
+			if(compararMatriculaAluno(matricula, a)){
+				a.setIdade(idade);
+				return;
+			}
+		}
+		throw new ExcecaoControleAcademico("Não encontrado");		
+	}
+	
+	public boolean setIdadeAlunoConfirmacao(int idade, int matricula){
+		for(Aluno a : alunos){
+			if(compararMatriculaAluno(matricula, a)){
+				if(a.getIdade() == idade){
+					return true;
+				}
+			}
+		}
+		throw new ExcecaoControleAcademico("Não encontrado");		
+	}
+	
+	public void setSexoAluno(String sexo, int matricula){
+		for(Aluno a : alunos){
+			if(compararMatriculaAluno(matricula, a)){
+				a.setSexo(sexo);
+				return;
+			}
+		}
+		throw new ExcecaoControleAcademico("Não encontrado");		
+	}
+	
+	public boolean setSexoAlunoConfirmacao(String sexo, int matricula){
+		for(Aluno a : alunos){
+			if(compararMatriculaAluno(matricula, a)){
+				if(a.getSexo().equals(sexo)){
+					return true;
+				}
+			}
+		}
+		throw new ExcecaoControleAcademico("Não encontrado");		
 	}
 }
