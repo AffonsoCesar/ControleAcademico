@@ -206,4 +206,51 @@ public class ControleAcademicoTest {
 		Aluno aluno = new Aluno("João", 18, "masculino", 12354, 1254125, "rua felipe rodrigues");
 		controleAcademico.getCPFAluno(aluno);
 	}
+	
+	@Test
+	public void addPrimeiroProfessor(){
+		Professor professor = new Professor("João", "computação", 1254125, "rua b");
+		controleAcademico.setPrimeiroProfessor(professor);
+	}
+	
+	@Test
+	public void addProfessor(){
+		Professor professor = new Professor("João", "computação", 1254125, "rua b");
+		controleAcademico.addProfessor(professor);
+	}
+	
+	@Test
+	public void removerProfessor(){
+		Professor professor = new Professor("João", "computação", 1254125, "rua b");
+		controleAcademico.removerProfessor(professor);
+		Assert.assertTrue("espera que remova o professor", controleAcademico.getProfessorRemovido(professor));
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void procurarProfessorPorNome(){
+		String nome = "Joaquim";
+		controleAcademico.procuraProfessorPorNome(nome);
+		Assert.assertTrue("Espera retornar o nome do professor", controleAcademico.procuraProfessorPorNomeConfirmacao(nome));
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void procurarProfessorPorMateria(){
+		String materia = "matemática";
+		controleAcademico.procuraProfessorPorMateria(materia);
+		Assert.assertTrue("espera retornar o nome do professor", controleAcademico.procuraProfessorPorMateriaComfirmacao(materia));
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void procurarProfessorPorCPF(){
+		int CPF = 1020232001;
+		controleAcademico.procuraProfessorPorCPF(CPF);
+		Assert.assertTrue("espera retornar o nome do professor", controleAcademico.procuraProfessorCPFConfirmacao(CPF));
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void procuraProfessorPorEndereco(){
+		String endereco = "Rua da mangueira";
+		controleAcademico.procuraProfessorPorEndereco(endereco);
+		Assert.assertTrue("espera retornar o nome do professor", controleAcademico.procuraProfessorPorEnderecoConfirmacao(endereco));
+	}
 }

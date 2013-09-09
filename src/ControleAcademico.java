@@ -3,6 +3,8 @@ import java.util.*;
 public class ControleAcademico {
 	private List<Aluno> alunos = new LinkedList<Aluno>();
 	private static boolean primeiroAluno;
+	private List<Professor> professores = new LinkedList<Professor>();
+	private static boolean primeiroProfessor;
 	
 	public List<Aluno> getAlunos(){
 		return alunos;
@@ -308,4 +310,130 @@ public class ControleAcademico {
 	}
 	
 	
+	public List<Professor> getProfessor(){
+		return professores;
+	}
+	
+	public void addProfessor(Professor professor){
+		if(this.professores == null){
+			this.setPrimeiroProfessor(professor);
+		}
+		else{
+			professores.add(professor);
+		}
+	}
+	
+	public void setPrimeiroProfessor(Professor p) {
+		professores.add(p);
+		primeiroProfessor = true;
+	}
+	
+	public boolean getPrimeiroProfessor(){
+		return primeiroProfessor;
+	}
+	
+	public String removerProfessor(Professor professor){
+		professores.remove(professor);
+		return professor.getNome();
+	}
+	
+	public boolean getProfessorRemovido(Professor p){
+		if(p.equals(professores)){
+			return false;
+		}
+		return true;
+	}
+	
+	public String procuraProfessorPorNome(String nome){
+		for(Professor p : professores){
+			if(comparaNomeProfessor(nome, p)){
+				return p.getNome();
+			}
+		}
+		throw new ExcecaoControleAcademico("Professor não encontrado");
+	}
+	
+	private boolean comparaNomeProfessor(String nome, Professor p) {
+		return p.getNome().equals(nome);
+	}
+	
+	public boolean procuraProfessorPorNomeConfirmacao(String nome){
+		for(Professor p : professores){
+			if(comparaNomeProfessor(nome, p)){
+				return true;
+			}
+		}
+		throw new ExcecaoControleAcademico("Professor não encontrado");
+	}
+	
+	public String procuraProfessorPorMateria(String materia){
+		for(Professor p : professores){
+			if(comparaMateriaProfessor(materia, p)){
+				return p.getNome();
+			}
+		}
+		throw new ExcecaoControleAcademico("Professor não encontrado");
+	}
+	
+	private boolean comparaMateriaProfessor(String materia, Professor p){
+		return p.getMateria().equals(materia);
+	}
+	
+	public boolean procuraProfessorPorMateriaComfirmacao(String materia){
+		for(Professor p : professores){
+			if(comparaMateriaProfessor(materia, p)){
+				return true;
+			}
+		}
+		throw new ExcecaoControleAcademico("Professor não encontrado");
+
+	}
+	
+	public String procuraProfessorPorCPF(int CPF){
+		for(Professor p : professores){
+			if(comparaCPFProfessor(CPF, p)){
+				return p.getNome();
+			}
+		}
+		throw new ExcecaoControleAcademico("Professor não encontrado");		
+	}
+	
+	private boolean comparaCPFProfessor(int CPF, Professor p){
+		return comparandoCPFProfessor(CPF, p);
+	}
+	
+	private boolean comparandoCPFProfessor(int CPF, Professor p){
+		return p.getCPF() == CPF;
+	}
+	
+	public boolean procuraProfessorCPFConfirmacao(int CPF){
+		for(Professor p : professores){
+			if(comparaCPFProfessor(CPF, p)){
+				return true;
+			}
+		}
+		throw new ExcecaoControleAcademico("Professor não encontrado");
+	}
+	
+	public String procuraProfessorPorEndereco(String endereco){
+		for(Professor p : professores){
+			if(comparaEnderecoProfessor(endereco, p)){
+				return p.getNome();
+			}
+		}
+		throw new ExcecaoControleAcademico("Professor não encontrado");
+	}
+	
+	private boolean comparaEnderecoProfessor(String endereco, Professor p){
+		return p.getEndereco().equals(endereco);
+	}
+	
+	public boolean procuraProfessorPorEnderecoConfirmacao(String endereco){
+		for(Professor p : professores){
+			if(comparaEnderecoProfessor(endereco, p)){
+				return true;
+			}
+		}
+		throw new ExcecaoControleAcademico("Professor não encontrado");
+	}
 }
