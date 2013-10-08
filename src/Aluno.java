@@ -7,12 +7,8 @@ public class Aluno {
 	private int CPF;
 	private String endereco;
 	
-	public Aluno(String nome, int idade, String sexo, int matricula, int CPF, String endereco) {
-		this.setIdade(idade);
-		this.setSexo(sexo);
-		this.setMatricula(matricula);
-		this.setCPF(CPF);
-		this.setEndereco(endereco);
+	public Aluno() {
+		
 	}
 
 	public String getNome() {
@@ -62,5 +58,4 @@ public class Aluno {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-	
 }

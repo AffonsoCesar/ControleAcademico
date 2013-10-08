@@ -5,6 +5,8 @@ public class ControleAcademico {
 	private static boolean primeiroAluno;
 	private List<Professor> professores = new LinkedList<Professor>();
 	private static boolean primeiroProfessor;
+	private Diretor diretor;
+	private ViceDiretor viceDiretor;
 	
 	public List<Aluno> getAlunos(){
 		return alunos;
@@ -290,25 +292,58 @@ public class ControleAcademico {
 	}
 	
 	public String getNomeAluno(Aluno aluno){
-		return aluno.getNome();
+		if(alunos.equals(aluno)){
+			return aluno.getNome();
+		}
+		else{
+			throw new ExcecaoControleAcademico("não existe esse aluno");
+		}
 	}
 	
 	public int getIdadeAluno(Aluno aluno){
-		return aluno.getIdade();
+		if(alunos.equals(aluno)){
+			return aluno.getIdade();
+		}
+		else{
+			throw new ExcecaoControleAcademico("não existe esse aluno");
+		}
 	}
 	
 	public String getSexoAluno(Aluno aluno){
-		return aluno.getSexo();
+		if(alunos.equals(aluno)){
+			return aluno.getSexo();
+		}
+		else{
+			throw new ExcecaoControleAcademico("não existe esse aluno");
+		}
 	}
 	
 	public int getMatriculaAluno(Aluno aluno){
-		return aluno.getMatricula();
+		if(alunos.equals(aluno)){
+			return aluno.getMatricula();
+		}
+		else{
+			throw new ExcecaoControleAcademico("não existe esse aluno");
+		}
 	}
 	
 	public int getCPFAluno(Aluno aluno){
-		return aluno.getCPF();
+		if(alunos.equals(aluno)){
+			return aluno.getCPF();
+		}
+		else{
+			throw new ExcecaoControleAcademico("não existe esse aluno");
+		}
 	}
 	
+	public String getEnderecoAluno(Aluno aluno){
+		if(alunos.equals(aluno)){
+			return aluno.getEndereco();
+		}
+		else{
+			throw new ExcecaoControleAcademico("não existe esse aluno");
+		}
+	}
 	
 	public List<Professor> getProfessor(){
 		return professores;
@@ -435,5 +470,253 @@ public class ControleAcademico {
 			}
 		}
 		throw new ExcecaoControleAcademico("Professor não encontrado");
+	}
+	
+	public void setNomeProfessorPorNome(String novoNome, String nome){
+		for(Professor p : professores){
+			if(comparaNomeProfessor(nome, p)){
+				p.setNome(novoNome);
+				return;
+			}
+		}
+		throw new ExcecaoControleAcademico("Professor não encontrado");
+	}
+	
+	public void setMateriaProfessorPorNome(String materia, String nome){
+		for(Professor p : professores){
+			if(comparaNomeProfessor(nome, p)){
+				p.setMateria(materia);
+				return;
+			}
+		}
+		throw new ExcecaoControleAcademico("Professor não encontrado");
+	}
+	
+	public void setCPFProfessor(int CPF, String nome){
+		for(Professor p : professores){
+			if(comparaNomeProfessor(nome, p)){
+				p.setCPF(CPF);
+				return;
+			}
+		}
+		throw new ExcecaoControleAcademico("Professor não encontrado");
+	}
+	
+	public void setEnderecoProfessorPorNome(String endereco, String nome){
+		for(Professor p : professores){
+			if(comparaNomeProfessor(nome, p)){
+				p.setEndereco(endereco);
+				return;
+			}
+		}
+		throw new ExcecaoControleAcademico("Professor não encontrado");
+	}
+	
+	public void setNomeProfessorPorCPF(String nome, int CPF){
+		for(Professor p : professores){
+			if(comparaCPFProfessor(CPF, p)){
+				p.setNome(nome);
+				return;
+			}
+		}
+		throw new ExcecaoControleAcademico("Professor não encontrado");
+	}
+	
+	public void setMateriaProfessorPorCPF(String materia, int CPF){
+		for(Professor p : professores){
+			if(comparaCPFProfessor(CPF, p)){
+				p.setMateria(materia);
+				return;
+			}
+		}
+		throw new ExcecaoControleAcademico("Professor não encontrado");
+	}
+	
+	public void setCPFProfessorPorCPF(int novoCPF, int CPF){
+		for(Professor p : professores){
+			if(comparaCPFProfessor(CPF, p)){
+				p.setCPF(CPF);
+				return;
+			}
+		}
+		throw new ExcecaoControleAcademico("Professor não encontrado");
+	}
+	
+	public void setEnderecoProfessorPorCPF(String endereco, int CPF){
+		for(Professor p : professores){
+			if(comparaCPFProfessor(CPF, p)){
+				p.setEndereco(endereco);
+				return;
+			}
+		}
+		throw new ExcecaoControleAcademico("Professor não encontrado");
+	}
+	
+	public String getNomeProfessor(Professor professor){
+		if(professores.equals(professor)){
+			return professor.getNome();
+		}
+		else{
+			throw new ExcecaoControleAcademico("não existe esse aluno");
+		}
+	}
+	
+	public String getMateriaProfessor(Professor professor){
+		if(professores.equals(professor)){
+			return professor.getMateria();
+		}
+		else{
+			throw new ExcecaoControleAcademico("não existe esse aluno");
+		}
+	}
+	
+	public int getCPFProfessor(Professor professor){
+		if(professores.equals(professor)){
+			return professor.getCPF();
+		}
+		else{
+			throw new ExcecaoControleAcademico("não existe esse aluno");
+		}
+	}
+	
+	public String getEnderecoProfessor(Professor professor){
+		if(professores.equals(professor)){
+			return professor.getEndereco();
+		}
+		else{
+			throw new ExcecaoControleAcademico("não existe esse aluno");
+		}
+	}
+	
+	public void adcionarDiretor(Diretor diretor){
+		this.diretor = diretor;
+	}
+	
+	public boolean adicionarDiretor(){
+		if(diretor != null){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
+	public void setNomeDiretor(String nome){
+		if(diretor != null){
+			diretor.setNome(nome);
+		}
+		else{
+			throw new ExcecaoControleAcademico("Não existe diretor cadastrado");
+		}
+	}
+	
+	public void setCPFDiretor(int CPF){
+		if(diretor != null){
+			diretor.setCPF(CPF);
+		}
+		else{
+			throw new ExcecaoControleAcademico("Não existe diretor cadastrado");
+		}
+	}
+	
+	public void setEnderecoDiretor(String enderecoo){
+		if(diretor != null){
+			diretor.setEndereco(enderecoo);
+		}
+		else{
+			throw new ExcecaoControleAcademico("Não existe diretor cadastrado");
+		}
+	}
+	
+	public String getNomeDiretor(){	
+		if(diretor != null){
+			return diretor.getNome();
+		}
+		else{
+			throw new ExcecaoControleAcademico("Não existe diretor cadastrado");
+		}
+	}
+	
+	public int getCPFDiretor(){
+		if(diretor != null){
+			return diretor.getCPF();
+		}
+		else{
+			throw new ExcecaoControleAcademico("Não existe diretor cadastrado");
+		}
+	}
+		
+	public String getEnderecoDiretor(){
+		if(diretor != null){
+			return diretor.getEndereco();
+		}
+		else{
+			throw new ExcecaoControleAcademico("Não existe diretor cadastrado");
+		}
+	}
+	
+	public void adcionarViceDiretor(ViceDiretor viceDiretor){
+		this.viceDiretor = viceDiretor;
+	}
+	
+	public boolean adicionaViceDiretor(){
+		if(viceDiretor != null){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
+	public void setNomeViceDiretor(String nome){
+		if(viceDiretor != null){
+			viceDiretor.setNome(nome);
+		}
+		else{
+			throw new ExcecaoControleAcademico("Não existe diretor cadastrado");
+		}
+	}
+	
+	public void setCPFViceDiretor(int CPF){
+		if(viceDiretor != null){
+			viceDiretor.setCPF(CPF);
+		}
+		else{
+			throw new ExcecaoControleAcademico("Não existe diretor cadastrado");
+		}
+	}
+	
+	public void setEnderecoViceDiretor(String endereco){
+		if(viceDiretor != null){
+			viceDiretor.setEndereco(endereco);
+		}
+		else{
+			throw new ExcecaoControleAcademico("Não existe diretor cadastrado");
+		}
+	}
+	
+	public String getNomeViceDiretor(){
+		if(viceDiretor != null){
+			return viceDiretor.getNome();
+		}
+		else{
+			throw new ExcecaoControleAcademico("Não existe diretor cadastrado");
+		}
+	}
+	
+	public int getCPFViceDiretor(){
+		if(viceDiretor != null){
+			return viceDiretor.getCPF();
+		}
+		else{
+			throw new ExcecaoControleAcademico("Não existe diretor cadastrado");
+		}
+	}
+	
+	public String getEnderecoViceDiretor(){
+		if (viceDiretor != null) {
+			return viceDiretor.getEndereco();
+		}
+		throw new ExcecaoControleAcademico("Não existe diretor cadastrado");
 	}
 }

@@ -1,11 +1,77 @@
 import junit.framework.Assert;
-
 import org.junit.Before;
 import org.junit.Test;
 
 public class ControleAcademicoTest {
-
 	private ControleAcademico controleAcademico;
+	private static final String ENDERECO_ALUNO = "Rua Pedro Batista";
+	private static final int CPF_ALUNO = 251254125;
+	private static final int MATRICULA_ALUNO = 81152424;
+	private static final String SEXO_ALUNO = "Masculino";
+	private static final int IDADE_ALUNO = 18;
+	private static final String NOME_ALUNO = "João";
+	private static final String ENDERECO_ALUNO1 = "rua 7 de setembro";
+	private static final int CPF_ALUNO1 = 01202355412;
+	private static final int MATRICULA_ALUNO1 = 12541254;
+	private static final String SEXO_ALUNO1 = "feminino";
+	private static final int IDADE_ALUNO1 = 19;
+	private static final String NOME_ALUNO1 = "José";
+	private static final String ENDERECO_PROFESSOR1 = "Rua 7 de setembro";
+	private static final int CPF_PROFESSOR1 = 1254125;
+	private static final String MATERIA_PROFESSOR1 = "Estrutura";
+	private static final String NOME_PROFESSOR1 = "Joaquim";
+	private static final String ENDERECO_PROFESSOR = "Rua da mangueira";
+	private static final int CPF_PROFESSOR = 12541254;
+	private static final String MATERIA_PROFESSOR = "L.P.";
+	private static final String NOME_PROFESSOR = "Mariano";
+	private static final String NOME_DIRETOR = "Roberto";
+	private static final int CPF_DIRETOR = 125524125;
+	private static final String ENDERECO_DIRETOR = "Av. Castelo Branco";
+	private static final String NOME_DIRETOR2 = "Renan";
+	private static final int CPF_DIRETOR2 = 4125251;
+	private static final String ENDERECO_DIRETOR2 = "rua Santo Amaro";
+	private static final String NOME_VICEDIRETOR = "Aoberto";
+	private static final int CPF_VICEDIRETOR = 135524125;
+	private static final String ENDERECO_VICEDIRETOR = "Av. Castelo Branco";
+	private static final String NOME_VICEDIRETOR2 = "Renan";
+	private static final int CPF_VICEDIRETOR2 = 4125251;
+	private static final String ENDERECO_VICEDIRETOR2 = "rua Santo Amaro";
+	
+	public Aluno aluno(){
+		Aluno aluno = new Aluno();
+		aluno.setNome(NOME_ALUNO);
+		aluno.setIdade(IDADE_ALUNO);
+		aluno.setSexo(SEXO_ALUNO);
+		aluno.setMatricula(MATRICULA_ALUNO);
+		aluno.setCPF(CPF_ALUNO);
+		aluno.setEndereco(ENDERECO_ALUNO);
+		return aluno;
+	}
+	
+	public Professor professor(){
+		Professor professor = new Professor();
+		professor.setNome(NOME_PROFESSOR);
+		professor.setMateria(MATERIA_PROFESSOR);
+		professor.setCPF(CPF_PROFESSOR);
+		professor.setEndereco(ENDERECO_PROFESSOR);
+		return professor;
+	}
+	
+	public Diretor diretor(){
+		Diretor diretor = new Diretor();
+		diretor.setNome(NOME_DIRETOR);
+		diretor.setCPF(CPF_DIRETOR);
+		diretor.setEndereco(ENDERECO_DIRETOR);
+		return diretor;
+	}
+	
+	public ViceDiretor viceDiretor(){
+		ViceDiretor viceDiretor = new ViceDiretor();
+		viceDiretor.setNome(NOME_VICEDIRETOR);
+		viceDiretor.setCPF(CPF_VICEDIRETOR);
+		viceDiretor.setEndereco(ENDERECO_VICEDIRETOR);
+		return viceDiretor;
+	}
 	
 	@Before
 	public void iniciar(){
@@ -14,243 +80,346 @@ public class ControleAcademicoTest {
 	
 	@Test
 	public void addPrimeiroAluno(){
-		Aluno aluno = new Aluno("João", 18, "masculino", 12354, 1254125, "rua felipe rodrigues");
+		Aluno aluno = aluno();
 		controleAcademico.setPrimeiroAluno(aluno);
+		Assert.assertTrue("espera adicionar primeiro aluno", controleAcademico.getPrimeiroAluno());
 	}
 	
 	@Test
 	public void addAluno(){
-		Aluno aluno = new Aluno("João", 18, "masculino", 12354, 1254125, "rua felipe rodrigues");
+		Aluno aluno = aluno();
 		controleAcademico.addAluno(aluno);
 	}
 	
 	@Test
 	public void removerAluno(){
-		Aluno aluno = new Aluno("João", 18, "masculino", 12354, 1254125, "rua felipe rodrigues");
+		Aluno aluno = aluno();
 		controleAcademico.removerAluno(aluno);
 		Assert.assertTrue("espera que remova aluno", controleAcademico.getAlunoRemovido(aluno));
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void procurarAlunoPorMatricula(){
-		int matricula = 12458547;
-		controleAcademico.procuraAlunoPorMatricula(matricula);
-		Assert.assertTrue("espera retornar nome do aluno", controleAcademico.procuraAlunoPormatriculaConfirmacao(matricula));
+		controleAcademico.procuraAlunoPorMatricula(MATRICULA_ALUNO);
+		Assert.assertTrue("espera retornar nome do aluno", controleAcademico.procuraAlunoPormatriculaConfirmacao(MATRICULA_ALUNO));
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void procurarAlunoPorNome(){
-		String nome = "João";
-		controleAcademico.procuraAlunoPorNome(nome);
-		Assert.assertTrue("espera retornar o nome do aluno", controleAcademico.procurarAlunoPorNomeConfirmacao(nome));
+		controleAcademico.procuraAlunoPorNome(NOME_ALUNO);
+		Assert.assertTrue("espera retornar o nome do aluno", controleAcademico.procurarAlunoPorNomeConfirmacao(NOME_ALUNO));
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void procurarAlunoPorCPF(){
-		int CPF = 0125412544;
-		controleAcademico.procurarAlunoPorCPF(CPF);
-		Assert.assertTrue("espera retornar o nome do aluno", controleAcademico.procuraAlunoPorCPFConfirmacao(CPF));
+		controleAcademico.procurarAlunoPorCPF(CPF_ALUNO);
+		Assert.assertTrue("espera retornar o nome do aluno", controleAcademico.procuraAlunoPorCPFConfirmacao(CPF_ALUNO));
 	}
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void setNomeAlunoPorMatricula(){
-		String nome = "José";
-		int matricula = 1234587;
-		controleAcademico.setNomeAlunoPorMatricula(nome, matricula);
+		controleAcademico.setNomeAlunoPorMatricula(NOME_ALUNO1, MATRICULA_ALUNO);
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void setIdadeAlunoPorMatricula(){
-		int idade = 18;
-		int matricula = 1254125;
-		controleAcademico.setIdadeAlunoPorMatricula(idade, matricula);
+		controleAcademico.setIdadeAlunoPorMatricula(IDADE_ALUNO1, MATRICULA_ALUNO);
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void setSexoAlunoPorMatricula(){
-		String sexo = "feminino";
-		int matricula = 1254125;
-		controleAcademico.setSexoAlunoPorMatricula(sexo, matricula);
+		controleAcademico.setSexoAlunoPorMatricula(SEXO_ALUNO1, MATRICULA_ALUNO);
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void setMatriculaAlunoPorMatricula(){
-		int novaMatricula = 12541254;
-		int matricula = 12525414;
-		controleAcademico.setMatriculaAlunoPorMatricula(novaMatricula, matricula);
+		controleAcademico.setMatriculaAlunoPorMatricula(MATRICULA_ALUNO1, MATRICULA_ALUNO);
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void setCPFAlunoPorMatricula(){
-		int CPF = 01202355412;
-		int matricula = 01242545214;
-		controleAcademico.setCPFAlunoPorMatricula(CPF, matricula);
+		controleAcademico.setCPFAlunoPorMatricula(CPF_ALUNO1, MATRICULA_ALUNO);
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void setEnderecoPorMatricula(){
-		String endereco = "rua 7 de setembro";
-		int matricula = 12454125;
-		controleAcademico.setEnderecoAlunoPorMatricula(endereco, matricula);
+		controleAcademico.setEnderecoAlunoPorMatricula(ENDERECO_ALUNO1, MATRICULA_ALUNO);
 	}
 
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void setNomeAlunoPorNome(){
-		String novoNome = "José";
-		String nome = "João";
-		controleAcademico.setNomeAlunoPorNome(novoNome, nome);
+		controleAcademico.setNomeAlunoPorNome(NOME_ALUNO1, NOME_ALUNO);
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void setIdadeAlunoPorNome(){
-		int idade = 25;
-		String nome = "João";
-		controleAcademico.setIdadeAlunoPorNome(idade, nome);
+		controleAcademico.setIdadeAlunoPorNome(IDADE_ALUNO1, NOME_ALUNO);
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void setSexoAlunoPorNome(){
-		String sexo = "masculino";
-		String nome = "João";
-		controleAcademico.setSexoAlunoPorNome(sexo, nome);
+		controleAcademico.setSexoAlunoPorNome(SEXO_ALUNO1, NOME_ALUNO);
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void setMatriculaAlunoPorNome(){
-		int matricula = 123524145;
-		String nome = "João";
-		controleAcademico.setMatriculaAlunoPorNome(matricula, nome);
+		controleAcademico.setMatriculaAlunoPorNome(MATRICULA_ALUNO1, NOME_ALUNO);
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void setCPFAlunoPorNome(){
-		int CPF = 125412589;
-		String nome = "João";
-		controleAcademico.setCPFAlunoPorNome(CPF, nome);
+		controleAcademico.setCPFAlunoPorNome(CPF_ALUNO1, NOME_ALUNO);
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void setEnderecoAlunoPorNome(){
-		String endereco = "rua pedro batista";
-		String nome = "Severino";
-		controleAcademico.setEnderecoAlunoProNome(endereco, nome);
+		controleAcademico.setEnderecoAlunoProNome(ENDERECO_ALUNO1, NOME_ALUNO);
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void setNomeAlunoPorCPF(){
-		String nome = "João";
-		int CPF = 1252145254;
-		controleAcademico.setNomeAlunoPorCPF(nome, CPF);
+		controleAcademico.setNomeAlunoPorCPF(NOME_ALUNO1, CPF_ALUNO);
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void setIdadeAlunoPorCPF(){
-		int idade = 25;
-		int CPF = 01254125;
-		controleAcademico.setIdadeAlunoPorCPF(idade, CPF);
+		controleAcademico.setIdadeAlunoPorCPF(IDADE_ALUNO1, CPF_ALUNO);
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void setSexoAlunoPorCPF(){
-		String sexo = "Masculino";
-		int CPF = 12541254;
-		controleAcademico.setSexoAlunoPorCPF(sexo, CPF);
+		controleAcademico.setSexoAlunoPorCPF(SEXO_ALUNO1, CPF_ALUNO);
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void setMatriculaAlunoPorCPF(){
-		int matricula = 012412115;
-		int CPF = 1252514452;
-		controleAcademico.setMatriculaAlunoPorCPF(matricula, CPF);
+		controleAcademico.setMatriculaAlunoPorCPF(MATRICULA_ALUNO1, CPF_ALUNO);
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void setCPFAlunoPorCPF(){
-		int novoCPF = 1245412541;
-		int CPF = 1256252541;
-		controleAcademico.setCPFalunoPorCPF(novoCPF, CPF);
+		controleAcademico.setCPFalunoPorCPF(CPF_ALUNO1, CPF_ALUNO);
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void setEnderecoAlunoPorCPF(){
-		String endereco = "rua severino de menezes lira";
-		int CPF = 1254401254;
-		controleAcademico.setEnderecoAlunoPorCPF(endereco, CPF);
+		controleAcademico.setEnderecoAlunoPorCPF(ENDERECO_ALUNO1, CPF_ALUNO);
 	}
 	
-	@Test
+	@Test(expected=ExcecaoControleAcademico.class)
 	public void getNomeAluno(){
-		Aluno aluno = new Aluno("João", 18, "masculino", 12354, 1254125, "rua felipe rodrigues");
+		Aluno aluno = aluno();
 		controleAcademico.getNomeAluno(aluno);
 	}
 	
-	@Test
+	@Test(expected=ExcecaoControleAcademico.class)
 	public void getIdadeAluno(){
-		Aluno aluno = new Aluno("João", 18, "masculino", 12354, 1254125, "rua felipe rodrigues");
+		Aluno aluno = aluno();
 		controleAcademico.getIdadeAluno(aluno);
 	}
 	
-	@Test
+	@Test(expected=ExcecaoControleAcademico.class)
 	public void getSexoAluno(){
-		Aluno aluno = new Aluno("João", 18, "masculino", 12354, 1254125, "rua felipe rodrigues");
+		Aluno aluno = aluno();
 		controleAcademico.getSexoAluno(aluno);
 	}
 	
-	@Test
+	@Test(expected=ExcecaoControleAcademico.class)
 	public void getMatriculaAluno(){
-		Aluno aluno = new Aluno("João", 18, "masculino", 12354, 1254125, "rua felipe rodrigues");
+		Aluno aluno = aluno();
 		controleAcademico.getMatriculaAluno(aluno);
 	}
 	
-	@Test
+	@Test(expected=ExcecaoControleAcademico.class)
 	public void getCPFAluno(){
-		Aluno aluno = new Aluno("João", 18, "masculino", 12354, 1254125, "rua felipe rodrigues");
+		Aluno aluno = aluno();
 		controleAcademico.getCPFAluno(aluno);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void getEnderecoAluno(){
+		Aluno aluno = aluno();
+		controleAcademico.getEnderecoAluno(aluno);
 	}
 	
 	@Test
 	public void addPrimeiroProfessor(){
-		Professor professor = new Professor("João", "computação", 1254125, "rua b");
+		Professor professor = professor();
 		controleAcademico.setPrimeiroProfessor(professor);
+		Assert.assertTrue("espera adicionar o primeiro Professor", controleAcademico.getPrimeiroProfessor());
 	}
 	
 	@Test
 	public void addProfessor(){
-		Professor professor = new Professor("João", "computação", 1254125, "rua b");
+		Professor professor = professor();
 		controleAcademico.addProfessor(professor);
 	}
 	
 	@Test
 	public void removerProfessor(){
-		Professor professor = new Professor("João", "computação", 1254125, "rua b");
+		Professor professor = professor();
 		controleAcademico.removerProfessor(professor);
 		Assert.assertTrue("espera que remova o professor", controleAcademico.getProfessorRemovido(professor));
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void procurarProfessorPorNome(){
-		String nome = "Joaquim";
-		controleAcademico.procuraProfessorPorNome(nome);
-		Assert.assertTrue("Espera retornar o nome do professor", controleAcademico.procuraProfessorPorNomeConfirmacao(nome));
+		controleAcademico.procuraProfessorPorNome(NOME_PROFESSOR);
+		Assert.assertTrue("Espera retornar o nome do professor", controleAcademico.procuraProfessorPorNomeConfirmacao(NOME_PROFESSOR));
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void procurarProfessorPorMateria(){
-		String materia = "matemática";
-		controleAcademico.procuraProfessorPorMateria(materia);
-		Assert.assertTrue("espera retornar o nome do professor", controleAcademico.procuraProfessorPorMateriaComfirmacao(materia));
+		controleAcademico.procuraProfessorPorMateria(MATERIA_PROFESSOR);
+		Assert.assertTrue("espera retornar o nome do professor", controleAcademico.procuraProfessorPorMateriaComfirmacao(MATERIA_PROFESSOR));
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void procurarProfessorPorCPF(){
-		int CPF = 1020232001;
-		controleAcademico.procuraProfessorPorCPF(CPF);
-		Assert.assertTrue("espera retornar o nome do professor", controleAcademico.procuraProfessorCPFConfirmacao(CPF));
+		controleAcademico.procuraProfessorPorCPF(CPF_PROFESSOR);
+		Assert.assertTrue("espera retornar o nome do professor", controleAcademico.procuraProfessorCPFConfirmacao(CPF_PROFESSOR));
 	}
 	
 	@Test(expected=ExcecaoControleAcademico.class)
 	public void procuraProfessorPorEndereco(){
-		String endereco = "Rua da mangueira";
-		controleAcademico.procuraProfessorPorEndereco(endereco);
-		Assert.assertTrue("espera retornar o nome do professor", controleAcademico.procuraProfessorPorEnderecoConfirmacao(endereco));
+		controleAcademico.procuraProfessorPorEndereco(ENDERECO_PROFESSOR);
+		Assert.assertTrue("espera retornar o nome do professor", controleAcademico.procuraProfessorPorEnderecoConfirmacao(ENDERECO_PROFESSOR));
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setNomeProfessorPorNome(){
+		controleAcademico.setNomeProfessorPorNome(NOME_PROFESSOR1, NOME_PROFESSOR);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setMateriaProfessorPorNome(){
+		controleAcademico.setMateriaProfessorPorNome(MATERIA_PROFESSOR1, NOME_PROFESSOR);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setCPFProfessorPorNome(){
+		controleAcademico.setCPFProfessor(CPF_PROFESSOR1, NOME_PROFESSOR);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setEnderecoProfessorPorNome(){
+		controleAcademico.setEnderecoProfessorPorNome(ENDERECO_PROFESSOR1, NOME_PROFESSOR);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setNomeProfessorPorCPF(){
+		controleAcademico.setNomeProfessorPorCPF(NOME_PROFESSOR1, CPF_PROFESSOR);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setMateriaProfessorPorCPF(){
+		controleAcademico.setMateriaProfessorPorCPF(MATERIA_PROFESSOR1, CPF_PROFESSOR);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setCPFProfessorPorCPF(){
+		controleAcademico.setCPFProfessorPorCPF(CPF_PROFESSOR1, CPF_PROFESSOR);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setEnderecoProfessorPorCPF(){
+		controleAcademico.setEnderecoProfessorPorCPF(ENDERECO_ALUNO1, CPF_PROFESSOR);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void getNomeProfessor(){
+		Professor professor = professor();
+		controleAcademico.getNomeProfessor(professor);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void getMateriaProfessor(){
+		Professor professor = professor();
+		controleAcademico.getMateriaProfessor(professor);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void getCPFProfessor(){
+		Professor professor = professor();
+		controleAcademico.getCPFProfessor(professor);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void getEnderecoProfessor(){
+		Professor professor = professor();
+		controleAcademico.getEnderecoProfessor(professor);
+	}
+	
+	@Test
+	public void AdcionarDiretor(){
+		Diretor diretor = diretor();
+		controleAcademico.adcionarDiretor(diretor);
+		Assert.assertTrue("espera que diretor tenha sido adicionado", controleAcademico.adicionarDiretor());
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setNomeDireto(){
+		controleAcademico.setNomeDiretor(NOME_DIRETOR2);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setCPFDiretor(){
+		controleAcademico.setCPFDiretor(CPF_DIRETOR2);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setEnderecoDiretor(){
+		controleAcademico.setEnderecoDiretor(ENDERECO_DIRETOR2);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void getNomeDiretor(){
+		controleAcademico.getNomeDiretor();
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void getCPFDiretor(){
+		controleAcademico.getCPFDiretor();
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void getEnderecoDiretor(){
+		controleAcademico.getEnderecoDiretor();
+	}
+	
+	@Test
+	public void AdcionarViceDiretor(){
+		ViceDiretor viceDiretor = new ViceDiretor();
+		controleAcademico.adcionarViceDiretor(viceDiretor);
+		Assert.assertTrue("espera que vice diretor tenha sido adicionado", controleAcademico.adicionaViceDiretor());
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setNomeVicePresidente(){
+		controleAcademico.setNomeViceDiretor(NOME_VICEDIRETOR2);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setCPFViceDiretor(){
+		controleAcademico.setCPFViceDiretor(CPF_VICEDIRETOR2);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void setEnderecoViceDiretor(){
+		controleAcademico.setEnderecoViceDiretor(ENDERECO_VICEDIRETOR2);
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void getNomeViceDiretor(){
+		controleAcademico.getNomeViceDiretor();
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void getCPFViceDiretor(){
+		controleAcademico.getCPFViceDiretor();
+	}
+	
+	@Test(expected=ExcecaoControleAcademico.class)
+	public void getEnderecoViceDireto(){
+		controleAcademico.getEnderecoViceDiretor();
 	}
 }
